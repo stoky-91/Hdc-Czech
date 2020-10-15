@@ -3,14 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hdcczech;
+package frames;
 
+import static frames.AddTrainer.nameLabel;
+import hdcczech.DbConnection;
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,10 +25,12 @@ import java.util.logging.Logger;
 public class Login1 extends javax.swing.JFrame {
 
     private static String user, pass;
+    Connection conn = new DbConnection().connect();
+    PreparedStatement pst;
 
     public Login1() {
         initComponents();
-       
+
     }
 
     /**
@@ -39,8 +47,8 @@ public class Login1 extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        userTxt1 = new javax.swing.JTextField();
         passTxt = new javax.swing.JPasswordField();
+        userTxt = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         Back = new javax.swing.JButton();
         login = new javax.swing.JButton();
@@ -54,11 +62,10 @@ public class Login1 extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
         jLabel3.setText("Heslo");
 
-        userTxt1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userTxt1ActionPerformed(evt);
-            }
-        });
+        passTxt.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+
+        userTxt.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        userTxt.setMinimumSize(new java.awt.Dimension(12, 40));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -67,18 +74,17 @@ public class Login1 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(userTxt1, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                    .addComponent(passTxt))
+                    .addComponent(passTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                    .addComponent(userTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(105, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(59, Short.MAX_VALUE)
-                .addComponent(userTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
-                .addComponent(passTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(68, Short.MAX_VALUE)
+                .addComponent(userTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56)
+                .addComponent(passTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
@@ -151,7 +157,7 @@ public class Login1 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(login)
                     .addComponent(Back))
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
 
         jLabel3.getAccessibleContext().setAccessibleName("heslo");
@@ -163,9 +169,10 @@ public class Login1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 /**
- * Zobrazení hlavní obrazovky pro uživatele, zavření stávající
- * @param evt 
- */
+     * Zobrazení hlavní obrazovky pro uživatele, zavření stávající
+     *
+     * @param evt
+     */
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
         try {
             TrainingUser user = new TrainingUser();
@@ -178,30 +185,44 @@ public class Login1 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BackActionPerformed
 
-/**
- * kontrola uživatelského jména a hesla uložené v databázi
- * @param evt 
- */
+    /**
+     * kontrola uživatelského jména a hesla uložené v databázi
+     *
+     * @param evt
+     */
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
+        String userName = userTxt.getText();
+        String password = passTxt.getText();
+        String sql = "Select username, password from managers where username=? and password=?\")";
+        String sql1 = "Select username, password from admin where username=? and password=?\")";
+        Connection conn = new DbConnection().connect();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps1 = conn.prepareStatement(sql1);
+            ps.setString(1, userName);
+            ps.setString(2, password);
+            ps1.setString(1, userName);
+            ps1.setString(2, password);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         try {
-            user = userTxt1.getText();
+            user = userTxt.getText();
             pass = passTxt.getText();
-            
-            
+
             boolean b = new DbConnection().checkLogin(user, pass);
-            
+
             if (b == true) {
                 Login1.this.hide();
+
             }
+
         } catch (ParseException ex) {
             Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_loginActionPerformed
-
-    private void userTxt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userTxt1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userTxt1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,6 +268,6 @@ public class Login1 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton login;
     private javax.swing.JPasswordField passTxt;
-    private javax.swing.JTextField userTxt1;
+    private javax.swing.JTextField userTxt;
     // End of variables declaration//GEN-END:variables
 }

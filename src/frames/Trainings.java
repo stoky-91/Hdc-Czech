@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hdcczech;
+package frames;
 
-import java.awt.Dimension;
-import java.beans.XMLEncoder;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import frames.Overview;
+import frames.Login1;
+import frames.Admin;
+import frames.AddTrainer;
+import hdcczech.DbConnection;
+import hdcczech.Trainer;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.Date;
@@ -17,16 +19,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Enumeration;
 import java.util.GregorianCalendar;
-import java.util.TimeZone;
-import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -43,11 +39,10 @@ public class Trainings extends javax.swing.JFrame implements Serializable {
     ResultSet rs;
 
     /**
-     * - komponenty
-     * - TrainerCombo()-naplnění ComboBoxů trenéry
-     * - nastavení rychlosti ScrollBaru
-     * - maximalizace okna
-     * - Date()- formátovaní jDateChooseru
+     * - komponenty - TrainerCombo()-naplnění ComboBoxů trenéry - nastavení
+     * rychlosti ScrollBaru - maximalizace okna - Date()- formátovaní
+     * jDateChooseru
+     *
      * @throws java.text.ParseException
      */
     public Trainings() throws SQLException, ParseException {
@@ -81,10 +76,9 @@ public class Trainings extends javax.swing.JFrame implements Serializable {
         dayChooser.setDate(date1);
     }
 
-   
-/**
- * naplnění ComboBoxů trenéry
- */
+    /**
+     * naplnění ComboBoxů trenéry
+     */
     private void TrainerCombo() {
         try {
 
@@ -792,6 +786,7 @@ public class Trainings extends javax.swing.JFrame implements Serializable {
         jSpinner110 = new javax.swing.JSpinner();
         jSpinner111 = new javax.swing.JSpinner();
         jSpinner112 = new javax.swing.JSpinner();
+        jLabel2 = new javax.swing.JLabel();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -808,7 +803,6 @@ public class Trainings extends javax.swing.JFrame implements Serializable {
         jCheckBoxMenuItem4.setText("jCheckBoxMenuItem4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(2500, 3700));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -817,11 +811,15 @@ public class Trainings extends javax.swing.JFrame implements Serializable {
                 formWindowOpened(evt);
             }
         });
+        getContentPane().setLayout(null);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setLayout(null);
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
         jButton1.setText("Tréninky");
+        jPanel1.add(jButton1);
+        jButton1.setBounds(305, 34, 110, 36);
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
         jButton2.setText("Přehled");
@@ -830,8 +828,12 @@ public class Trainings extends javax.swing.JFrame implements Serializable {
                 jButton2ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton2);
+        jButton2.setBounds(427, 34, 110, 36);
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\mstok\\OneDrive\\Dokumenty\\NetBeansProjects\\HdcCzech\\src\\hdcczech\\images\\Bez názvu.png")); // NOI18N
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(7, 1, 240, 103);
 
         jButton3.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
         jButton3.setText("Trenéři");
@@ -840,6 +842,8 @@ public class Trainings extends javax.swing.JFrame implements Serializable {
                 jButton3ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton3);
+        jButton3.setBounds(549, 34, 110, 36);
 
         jButton4.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
         jButton4.setText("Odhlásit");
@@ -848,6 +852,8 @@ public class Trainings extends javax.swing.JFrame implements Serializable {
                 jButton4ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton4);
+        jButton4.setBounds(793, 34, 110, 36);
 
         jButton5.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
         jButton5.setText("Účet");
@@ -856,41 +862,17 @@ public class Trainings extends javax.swing.JFrame implements Serializable {
                 jButton5ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton5);
+        jButton5.setBounds(671, 34, 110, 36);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(58, 58, 58)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3)
-                            .addComponent(jButton5)
-                            .addComponent(jButton4))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        nameLabel2.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        nameLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nameLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(nameLabel2);
+        nameLabel2.setBounds(680, 76, 230, 40);
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(-2, 0, 1900, 120);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -901,6 +883,9 @@ public class Trainings extends javax.swing.JFrame implements Serializable {
         dayChooser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 dayChooserMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                dayChooserMouseEntered(evt);
             }
         });
 
@@ -936,6 +921,9 @@ public class Trainings extends javax.swing.JFrame implements Serializable {
                         .addComponent(jLabel3)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(0, 117, 1904, 48);
 
         jScrollPane1.setMaximumSize(new java.awt.Dimension(1885, 3254));
 
@@ -6117,27 +6105,13 @@ public class Trainings extends javax.swing.JFrame implements Serializable {
 
         jScrollPane1.setViewportView(jPanel4);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1898, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 832, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(0, 171, 1898, 832);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hdcczech/images/1253997.jpg"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(-19, -10, 1990, 1040);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -6181,7 +6155,42 @@ public class Trainings extends javax.swing.JFrame implements Serializable {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void dayChooserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dayChooserMouseClicked
-        // TODO add your handling code here:
+      try {
+            SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd");
+            String date = sDate.format(dayChooser.getDate());
+            String query = "select time, time1, player, trainer, trainer1, trainer2, notes, training from training where date= '" + date + "'";
+            pst=conn.prepareStatement(query);
+            rs = pst.executeQuery();
+           
+            //Training training;
+            
+            while (rs.next()) {
+                // training = new Training(rs.getDate("date"), rs.getString("time"), rs.getString("time1"), rs.getString("player"), rs.getString("trainer"), rs.getString("notes"), rs.getString("training"));
+                // TrainingsList.add(training);
+                //}
+               
+            
+            
+                //if(rs.next()) {
+              String jj = rs.getString("time");
+             //jSpinner1.setValue(jj);
+                
+                String FN = rs.getString("player");
+                jTextField1.setText(FN);
+                String LN = rs.getString("trainer");
+                jComboBox1.setSelectedItem(LN);
+                String Des = rs.getString("notes");
+                jTextField3.setText(Des);
+                
+           
+                
+                
+            } 
+        } catch (SQLException ex) {
+            Logger.getLogger(Trainings.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+                
     }//GEN-LAST:event_dayChooserMouseClicked
 
     /**
@@ -6189,7 +6198,7 @@ public class Trainings extends javax.swing.JFrame implements Serializable {
      */
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         date = new Date(dayChooser.getDate().getTime());
-SimpleDateFormat sdf=new SimpleDateFormat("hh:mm");
+//SimpleDateFormat sdf=new SimpleDateFormat("hh:mm");
 
         try {
             String query = "INSERT into training(date, time, time1, player, trainer, trainer1, trainer2, notes, training) values (?,?,?,?,?,?,?,?,?)";
@@ -7073,7 +7082,11 @@ SimpleDateFormat sdf=new SimpleDateFormat("hh:mm");
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Overview over = null;
         try {
-            over = new Overview();
+            try {
+                over = new Overview();
+            } catch (ParseException ex) {
+                Logger.getLogger(Trainings.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Trainings.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -7314,50 +7327,71 @@ SimpleDateFormat sdf=new SimpleDateFormat("hh:mm");
     }//GEN-LAST:event_formWindowClosing
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-     
+
         try {
             SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd");
             String date = sDate.format(dayChooser.getDate());
             String query = "select time, time1, player, trainer, trainer1, trainer2, notes, training from training where date= '" + date + "'";
-            pst=conn.prepareStatement(query);
-            
+            pst = conn.prepareStatement(query);
             rs = pst.executeQuery();
-            
+
             //Training training;
-            
             while (rs.next()) {
                 // training = new Training(rs.getDate("date"), rs.getString("time"), rs.getString("time1"), rs.getString("player"), rs.getString("trainer"), rs.getString("notes"), rs.getString("training"));
                 // TrainingsList.add(training);
                 //}
-                
-                
+
                 //if(rs.next()) {
-                
+                String jj = rs.getString("time");
+                //jSpinner1.setValue(jj);
+
                 String FN = rs.getString("player");
                 jTextField1.setText(FN);
                 String LN = rs.getString("trainer");
                 jComboBox1.setSelectedItem(LN);
                 String Des = rs.getString("notes");
                 jTextField3.setText(Des);
-                
-           
-                
-                
-            } 
+
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Trainings.class.getName()).log(Level.SEVERE, null, ex);
         }
-                
-                
-                
-                
-                
-                
-                    
-        
-        
-        
+
+
     }//GEN-LAST:event_formWindowOpened
+
+    private void dayChooserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dayChooserMouseEntered
+        try {
+            
+            SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd");
+            String date = sDate.format(dayChooser.getDate());
+            
+            String query = "select time, time1, player, trainer, trainer1, trainer2, notes, training from training where date= '" + date + "'";
+            pst = conn.prepareStatement(query);
+            rs = pst.executeQuery();
+
+            //Training training;
+            while (rs.next()) {
+                // training = new Training(rs.getDate("date"), rs.getString("time"), rs.getString("time1"), rs.getString("player"), rs.getString("trainer"), rs.getString("notes"), rs.getString("training"));
+                // TrainingsList.add(training);
+                //}
+
+                //if(rs.next()) {
+                String jj = rs.getString("time");
+                //jSpinner1.setValue(jj);
+
+                String FN = rs.getString("player");
+                jTextField1.setText(FN);
+                String LN = rs.getString("trainer");
+                jComboBox1.setSelectedItem(LN);
+                String Des = rs.getString("notes");
+                jTextField3.setText(Des);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Trainings.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_dayChooserMouseEntered
 
     /**
      * @param args the command line arguments
@@ -7540,6 +7574,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("hh:mm");
     private javax.swing.JComboBox<String> jComboBox98;
     private javax.swing.JComboBox<String> jComboBox99;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel252;
     private javax.swing.JLabel jLabel253;
     private javax.swing.JLabel jLabel254;
@@ -7983,5 +8018,6 @@ SimpleDateFormat sdf=new SimpleDateFormat("hh:mm");
     private javax.swing.JTextField jTextField97;
     private javax.swing.JTextField jTextField98;
     private javax.swing.JTextField jTextField99;
+    public static final javax.swing.JLabel nameLabel2 = new javax.swing.JLabel();
     // End of variables declaration//GEN-END:variables
 }

@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hdcczech;
+package frames;
 
+import frames.OverviewUser;
+import frames.Login1;
+import hdcczech.DbConnection;
+import hdcczech.Trainer;
 import java.awt.Dimension;
 import java.beans.XMLEncoder;
 import java.io.FileNotFoundException;
@@ -7011,7 +7015,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("hh:mm");
             JOptionPane.showMessageDialog(null, "Úspěšně vloženo");
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Administrátor s tímto ID je již vložen");
+            JOptionPane.showMessageDialog(null, "Chyba");
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -7022,7 +7026,11 @@ SimpleDateFormat sdf=new SimpleDateFormat("hh:mm");
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         OverviewUser over = null;
         try {
-            over = new OverviewUser();
+            try {
+                over = new OverviewUser();
+            } catch (ParseException ex) {
+                Logger.getLogger(TrainingUser.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(OverviewUser.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hdcczech;
+package frames;
 
 
+import hdcczech.Clear;
+import hdcczech.DbConnection;
+import hdcczech.Trainer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,7 +31,8 @@ public class AddTrainer extends javax.swing.JFrame implements Clear {
 
     Connection conn = new DbConnection().connect();
     PreparedStatement pst;
-
+ 
+ 
     /**
      * -komponenty
      * - show_trainers() - zobrazení trenérů v tabulce
@@ -38,8 +42,16 @@ public class AddTrainer extends javax.swing.JFrame implements Clear {
         initComponents();
         show_trainers();
         setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
+ 
+
+     
        }
 
+    
+     
+     
+ 
+ 
     /**
      * Výběr všech trenérů do ArrayListu
      * @return ArrayList s trenéry
@@ -62,6 +74,8 @@ public class AddTrainer extends javax.swing.JFrame implements Clear {
         }
         return trainersList;
     }
+     
+    
      
      /**
       * Přidání trenérů do tabulky
@@ -174,6 +188,10 @@ public class AddTrainer extends javax.swing.JFrame implements Clear {
             }
         });
 
+        nameLabel.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        nameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nameLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -188,16 +206,19 @@ public class AddTrainer extends javax.swing.JFrame implements Clear {
                 .addGap(44, 44, 44)
                 .addComponent(jButton3)
                 .addGap(28, 28, 28)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(jButton4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(jButton4))
+                    .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(458, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
@@ -206,7 +227,9 @@ public class AddTrainer extends javax.swing.JFrame implements Clear {
                             .addComponent(jButton1)
                             .addComponent(jButton3)
                             .addComponent(jButton5)
-                            .addComponent(jButton4))))
+                            .addComponent(jButton4))
+                        .addGap(32, 32, 32)
+                        .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -379,14 +402,18 @@ public class AddTrainer extends javax.swing.JFrame implements Clear {
      * Zobrazení okna s přehledem, zavření stávajícího
      */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Overview over = null;
         try {
+            Overview over = null;
+            
             over = new Overview();
+            
+            over.setVisible(true);
+            this.setVisible(false);
         } catch (SQLException ex) {
             Logger.getLogger(AddTrainer.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(AddTrainer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        over.setVisible(true);
-        this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -595,6 +622,7 @@ public class AddTrainer extends javax.swing.JFrame implements Clear {
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField mailTxt;
     private javax.swing.JTextField mobileTxt;
+    public static final javax.swing.JLabel nameLabel = new javax.swing.JLabel();
     private javax.swing.JTextField nameTxt;
     private javax.swing.JButton reset;
     private javax.swing.JTextField specializationTxt;

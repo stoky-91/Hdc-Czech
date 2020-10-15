@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hdcczech;
+package frames;
 
+import hdcczech.Clear;
+import hdcczech.DbConnection;
+import hdcczech.Managers;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,25 +29,27 @@ import javax.swing.table.TableModel;
  */
 public class Admin extends javax.swing.JFrame implements Clear {
 
-    Connection conn = new DbConnection().connect();
+     Connection conn = new DbConnection().connect(); 
     PreparedStatement pst;
-    private static String id, name, username, password, user;
+    Statement stmt;
+    ResultSet rs;
+
 
     /**
-     * 
-     * - komponenty
-     * - show_admin()-zobrazení trenérů v tabulce
-     * - maximalizace okna
+     *
+     * - komponenty - show_admin()-zobrazení trenérů v tabulce - maximalizace
+     * okna
      */
-
     public Admin() throws SQLException {
         initComponents();
         show_admin();
         setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
+  
     }
 
     /**
      * Vypsání trenérů z databáze
+     *
      * @return ArrayList s manažery
      */
     public ArrayList<Managers> managersList() throws SQLException {
@@ -111,8 +116,7 @@ public class Admin extends javax.swing.JFrame implements Clear {
         jButton3 = new javax.swing.JButton();
         javax.swing.JButton jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        userTxt = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -129,10 +133,19 @@ public class Admin extends javax.swing.JFrame implements Clear {
         delete = new javax.swing.JButton();
         add = new javax.swing.JButton();
         update = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txtoldpass = new javax.swing.JPasswordField();
+        txtNewPass = new javax.swing.JPasswordField();
+        confirmBtn = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setLayout(null);
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
         jButton1.setText("Tréninky");
@@ -141,6 +154,8 @@ public class Admin extends javax.swing.JFrame implements Clear {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(303, 21, 110, 36);
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
         jButton2.setText("Přehled");
@@ -149,8 +164,12 @@ public class Admin extends javax.swing.JFrame implements Clear {
                 jButton2ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton2);
+        jButton2.setBounds(451, 21, 89, 36);
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\mstok\\OneDrive\\Dokumenty\\NetBeansProjects\\HdcCzech\\src\\hdcczech\\images\\Bez názvu.png")); // NOI18N
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(7, 7, 240, 114);
 
         jButton3.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
         jButton3.setText("Trenéři");
@@ -159,6 +178,8 @@ public class Admin extends javax.swing.JFrame implements Clear {
                 jButton3ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton3);
+        jButton3.setBounds(584, 21, 87, 36);
 
         jButton4.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
         jButton4.setText("Odhlásit");
@@ -167,6 +188,8 @@ public class Admin extends javax.swing.JFrame implements Clear {
                 jButton4ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton4);
+        jButton4.setBounds(831, 21, 95, 36);
 
         jButton5.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
         jButton5.setText("Účet");
@@ -175,79 +198,58 @@ public class Admin extends javax.swing.JFrame implements Clear {
                 jButton5ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton5);
+        jButton5.setBounds(699, 21, 90, 36);
 
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        nameLabel1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        nameLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nameLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(nameLabel1);
+        nameLabel1.setBounds(702, 79, 270, 40);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(56, 56, 56)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jButton2)
-                .addGap(44, 44, 44)
-                .addComponent(jButton3)
-                .addGap(28, 28, 28)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jButton4))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(userTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(412, 412, 412))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1)
-                            .addComponent(jButton3)
-                            .addComponent(jButton5)
-                            .addComponent(jButton4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(userTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hdcczech/images/9bPYnG - kopie.jpg"))); // NOI18N
+        jPanel1.add(jLabel9);
+        jLabel9.setBounds(-9, -10, 1540, 170);
 
         jTabbedPane1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jPanel2.setLayout(null);
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel2.setText("ID");
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(37, 45, 30, 22);
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel3.setText("Jméno a příjmení");
+        jPanel2.add(jLabel3);
+        jLabel3.setBounds(37, 101, 150, 22);
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel4.setText("Přihlašovací jméno");
+        jPanel2.add(jLabel4);
+        jLabel4.setBounds(37, 163, 160, 22);
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel5.setText("Heslo");
+        jPanel2.add(jLabel5);
+        jLabel5.setBounds(37, 239, 60, 22);
 
         idTxt.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jPanel2.add(idTxt);
+        idTxt.setBounds(236, 33, 200, 34);
 
         nameTxt.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jPanel2.add(nameTxt);
+        nameTxt.setBounds(236, 89, 200, 34);
 
         usernameTxt.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jPanel2.add(usernameTxt);
+        usernameTxt.setBounds(236, 151, 200, 34);
 
         passwordTxt.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jPanel2.add(passwordTxt);
+        passwordTxt.setBounds(236, 227, 200, 34);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -272,6 +274,9 @@ public class Admin extends javax.swing.JFrame implements Clear {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        jPanel2.add(jScrollPane1);
+        jScrollPane1.setBounds(454, 6, 675, 452);
+
         reset.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         reset.setText("Reset");
         reset.setPreferredSize(new java.awt.Dimension(100, 34));
@@ -280,6 +285,8 @@ public class Admin extends javax.swing.JFrame implements Clear {
                 resetActionPerformed(evt);
             }
         });
+        jPanel2.add(reset);
+        reset.setBounds(37, 403, 100, 34);
 
         delete.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         delete.setText("Vymazat");
@@ -289,6 +296,8 @@ public class Admin extends javax.swing.JFrame implements Clear {
                 deleteActionPerformed(evt);
             }
         });
+        jPanel2.add(delete);
+        delete.setBounds(37, 322, 100, 34);
 
         add.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         add.setText("Přidat");
@@ -298,6 +307,8 @@ public class Admin extends javax.swing.JFrame implements Clear {
                 addActionPerformed(evt);
             }
         });
+        jPanel2.add(add);
+        add.setBounds(336, 322, 100, 34);
 
         update.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         update.setText("Upravit");
@@ -307,75 +318,81 @@ public class Admin extends javax.swing.JFrame implements Clear {
                 updateActionPerformed(evt);
             }
         });
+        jPanel2.add(update);
+        update.setBounds(336, 403, 100, 34);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(reset, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
-                        .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(62, 62, 62)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(idTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(nameTxt)
-                            .addComponent(usernameTxt)
-                            .addComponent(passwordTxt)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(379, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(34, 34, 34)
-                                .addComponent(jLabel3))
-                            .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel4))
-                    .addComponent(usernameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5)
-                    .addComponent(passwordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(reset, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47))
-        );
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hdcczech/images/9bPYnG - kopie.jpg"))); // NOI18N
+        jLabel10.setLabelFor(delete);
+        jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel2.add(jLabel10);
+        jLabel10.setBounds(-12, -40, 1530, 650);
 
         jTabbedPane1.addTab("Administrátor", jPanel2);
+
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel7.setText("Současné heslo");
+
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel8.setText("Nové heslo");
+
+        txtoldpass.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+
+        txtNewPass.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+
+        confirmBtn.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        confirmBtn.setText("Potvrdit");
+        confirmBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
+                        .addGap(74, 74, 74)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtoldpass, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(txtNewPass)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(395, 395, 395)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 6, Short.MAX_VALUE)))
+                .addContainerGap(1155, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(154, 154, 154)
+                .addComponent(confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtoldpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
+                .addComponent(confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(203, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Změnit heslo", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -384,24 +401,24 @@ public class Admin extends javax.swing.JFrame implements Clear {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addComponent(jTabbedPane1))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 729, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 38, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
      * Otevře okno s tréninky, zavře stávající
-      */
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             Trainings ad = new Trainings();
@@ -416,11 +433,15 @@ public class Admin extends javax.swing.JFrame implements Clear {
 
     /**
      * Otevře okno s přehledem, zavře stávající
-      */
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Overview over = null;
         try {
-            over = new Overview();
+            try {
+                over = new Overview();
+            } catch (ParseException ex) {
+                Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -429,7 +450,7 @@ public class Admin extends javax.swing.JFrame implements Clear {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
-     * Otevře okno s AddTrainer, zavře stávajícího 
+     * Otevře okno s AddTrainer, zavře stávajícího
      */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         AddTrainer add = null;
@@ -477,7 +498,6 @@ public class Admin extends javax.swing.JFrame implements Clear {
             JOptionPane.showMessageDialog(null, "Chyba");
         }
 
-  
         //reset
         clearFields();
 
@@ -498,7 +518,7 @@ public class Admin extends javax.swing.JFrame implements Clear {
             model.setRowCount(0);
             show_admin();
             JOptionPane.showMessageDialog(null, "Úspěšně vymazáno");
-               pst.close();
+            pst.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
 
@@ -506,7 +526,8 @@ public class Admin extends javax.swing.JFrame implements Clear {
     }//GEN-LAST:event_deleteActionPerformed
 
     /**
-     * Po kliknutí na manažera v tabulce, se zobrazí jeho údaje v TextFieldech, kde se mohou editovat
+     * Po kliknutí na manažera v tabulce, se zobrazí jeho údaje v TextFieldech,
+     * kde se mohou editovat
      */
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int i = jTable1.getSelectedRow();
@@ -518,7 +539,8 @@ public class Admin extends javax.swing.JFrame implements Clear {
 
     /**
      * Update manažerů v databázi
-     * @param evt 
+     *
+     * @param evt
      */
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
         try {
@@ -535,7 +557,7 @@ public class Admin extends javax.swing.JFrame implements Clear {
             model.setRowCount(0);
             show_admin();
             JOptionPane.showMessageDialog(null, "Úspěšně upraveno");
-               pst.close();
+            pst.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -547,6 +569,44 @@ public class Admin extends javax.swing.JFrame implements Clear {
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
         clearFields();
     }//GEN-LAST:event_resetActionPerformed
+
+
+    private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
+
+         try {
+             Connection conn = new DbConnection().connect();
+             Statement stmt = conn.createStatement();
+             String oldpass = "select * from managers where username = '"+nameLabel1.getText()+"' and password = '"+txtoldpass.getText()+"'";
+             ResultSet rs = stmt.executeQuery(oldpass);
+             if(rs.next()){
+             String updatepass = "Update managers set password = '"+txtNewPass.getText()+"' where username = '"+nameLabel1.getText()+"'";
+             int k = stmt.executeUpdate(updatepass);
+             if(k>0){
+             JOptionPane.showMessageDialog(rootPane, "Heslo úspěšně změněno");
+             txtoldpass.setText("");
+             txtNewPass.setText("");
+             }
+             else{
+             JOptionPane.showMessageDialog(rootPane, "Heslo nezměněno");
+             }
+             
+             }
+             else{
+               JOptionPane.showMessageDialog(rootPane, "Heslo není správně");
+             }
+            
+         } catch (SQLException ex) { 
+             Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         
+        
+         try {
+             conn.close();
+         } catch (SQLException ex) {
+             Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        
+    }//GEN-LAST:event_confirmBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -589,6 +649,7 @@ public class Admin extends javax.swing.JFrame implements Clear {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
+    private javax.swing.JButton confirmBtn;
     private javax.swing.JButton delete;
     private javax.swing.JTextField idTxt;
     private javax.swing.JButton jButton1;
@@ -596,21 +657,28 @@ public class Admin extends javax.swing.JFrame implements Clear {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    public static final javax.swing.JLabel nameLabel1 = new javax.swing.JLabel();
     private javax.swing.JTextField nameTxt;
     private javax.swing.JPasswordField passwordTxt;
     private javax.swing.JButton reset;
+    private javax.swing.JPasswordField txtNewPass;
+    private javax.swing.JPasswordField txtoldpass;
     private javax.swing.JButton update;
-    private javax.swing.JLabel userTxt;
     private javax.swing.JTextField usernameTxt;
     // End of variables declaration//GEN-END:variables
 }

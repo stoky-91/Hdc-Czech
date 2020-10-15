@@ -6,7 +6,6 @@
 package hdcczech;
 
 import java.util.Date;
-import java.util.ArrayList;
 
 /**
  *
@@ -14,22 +13,22 @@ import java.util.ArrayList;
  */
 public class Training {
 
-    protected String player, player1, trainer, trainer1, trainer2, time, time1, notes, notes1, training;      
-    protected Date dateD;
+ public  String player, player1, trainer, trainer1, trainer2, time, time1, notes, notes1, training;      
+  public Date dateD;
 
    
 
-    public Training(Date dateD, String time, String time1, String player, String trainer, String trainer1, String trainer2, String notes, String notes1) {
+    public Training(Date dateD, String time, String time1, String player, String trainer, String trainer1, String trainer2, String notes, String training) {
 
-        this.dateD = dateD;
-        this.player = player;
+        this.dateD = dateD;       
         this.time = time;
         this.time1 = time1;
+        this.player = player;
         this.trainer = trainer;
         this.trainer1 = trainer1;
         this.trainer2 = trainer2;
         this.notes = notes;
-        this.notes1 = notes1;
+        this.training = training;
     }
 
     public Training(String training) {
